@@ -16,7 +16,8 @@
     </div>
 </template>
 <script>
-import axios from 'axios';
+// import axios from 'axios';
+import apiClient from '@/services/api';
 
 export default {
     name: "GeneratorComponent",
@@ -41,7 +42,7 @@ export default {
                     story: ""
                 };
                 const url = `/api/add`;
-                const response = await axios.post(url, null, { params: newCocktail });
+                const response = await apiClient.post(url, null, { params: newCocktail });
                 this.cocktails.push(response.data);
             } catch (err) {
                 console.log(err);
@@ -75,11 +76,11 @@ export default {
         }
     },
     async mounted() {
-        const nameResult = await axios.get("/api/generate/name")
+        const nameResult = await apiClient.get("/api/generate/name")
         this.namesBase = nameResult.data
-        const ingredientsResult = await axios.get("/api/generate/ingredient")
+        const ingredientsResult = await apiClient.get("/api/generate/ingredient")
         this.ingredientsBase = ingredientsResult.data
-        const imagesResult = await axios.get("/api/generate/image")
+        const imagesResult = await apiClient.get("/api/generate/image")
         this.imagePaths = imagesResult.data
     },
 }

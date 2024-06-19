@@ -77,7 +77,8 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import apiClient from '@/services/api';
 
     export default {
         name: "BaseComponent",
@@ -99,20 +100,20 @@ import axios from 'axios'
             async addToFavourite(el) {
                 try {
                     el.favourite = !el.favourite
-                    await axios.put(`/api/favourite/favourite-upd/${el._id}`, {favourite: el.favourite})
+                    await apiClient.put(`/api/favourite/favourite-upd/${el._id}`, {favourite: el.favourite})
                 } catch (err) {
                     console.log(err)
                 }
             },
             async findCocktail() {
-                let result = await axios.get('/api/' + this.findText)
+                let result = await apiClient.get('/api/' + this.findText)
                 console.log(result.data);
                 this.cocktails = result.data
             },
             async resetCocktails() {
                 try {
                     this.findText = "";
-                    const result = await axios.get("/api/base");
+                    const result = await apiClient.get("/api/base");
                     this.cocktails = result.data;
                 } catch (err) {
                     console.log(err);
@@ -128,7 +129,7 @@ import axios from 'axios'
                     story: ""
                 };
                 const url = `/api/add`;
-                const response = await axios.post(url, null, { params: newCocktail });
+                const response = await apiClient.post(url, null, { params: newCocktail });
                 this.cocktails.push(response.data);
 
                 this.enterName = '';
@@ -140,7 +141,7 @@ import axios from 'axios'
         },
             async deleteCocktail(element, index) {
             try {
-                await axios.delete('/api/' + element._id);
+                await apiClient.delete('/api/' + element._id);
                 this.cocktails.splice(index, 1);
             } catch (err) {
                 console.log(err);
@@ -149,7 +150,7 @@ import axios from 'axios'
         },
         async mounted() {
             try {
-                const result = await axios.get("/api/base")
+                const result = await apiClient.get("/api/base")
                 console.log(result);
                 this.cocktails = result.data
             } catch (err) {

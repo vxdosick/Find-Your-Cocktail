@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
+import apiClient from '@/services/api';
 
 export default {
     name: "FavouriteComponent",
@@ -45,27 +46,27 @@ export default {
         async deleteStory(el) {
             el.story = ""
             el.storyText = ""
-            await axios.put(`/api/favourite/favourite-story/${el._id}`, { story: el.story })
+            await apiClient.put(`/api/favourite/favourite-story/${el._id}`, { story: el.story })
         },
         async addStory(el) {
             el.story = el.storyText
-            await axios.put(`/api/favourite/favourite-story/${el._id}`, { story: el.story })
+            await apiClient.put(`/api/favourite/favourite-story/${el._id}`, { story: el.story })
         },
         async addToFavourite(el, i) {
             el.favourite = !el.favourite
-            await axios.put(`/api/favourite/favourite-upd/${el._id}`, { favourite: el.favourite })
+            await apiClient.put(`/api/favourite/favourite-upd/${el._id}`, { favourite: el.favourite })
             if (!el.favourite) {
                 this.favourite.splice(i, 1)
             }
         },
         async deleteCocktail(el, i) {
-            await axios.delete(`/api/favourite/favourite-del/${el._id}`)
+            await apiClient.delete(`/api/favourite/favourite-del/${el._id}`)
             this.favourite.splice(i, 1)
         }
     },
     async mounted() {
         try {
-            const result = await axios.get("/api/favourite/favourite")
+            const result = await apiClient.get("/api/favourite/favourite")
             this.favourite = result.data.map(item => ({ ...item, storyText: '' }))
             console.log(this.favourite);
             console.log(result.data);

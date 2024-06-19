@@ -2,3 +2,4 @@ public/node_modules
 server/node_modules
 server/.env
 node_modules
+public/src/.env.production
