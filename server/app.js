@@ -9,8 +9,14 @@ const config_1 = require("./config");
 const allItemsRouter_1 = require("./router/allItemsRouter");
 const favouriteRouter_1 = require("./router/favouriteRouter");
 const generateRouter_1 = require("./router/generateRouter");
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-(0, mongoose_1.connect)(config_1.MONGO);
+const corsOptions = {
+    origin: 'https://find-your-cocktail-2.onrender.com',
+    optionsSuccessStatus: 200,
+};
+app.use((0, cors_1.default)(corsOptions));
+(0, mongoose_1.connect)(String(config_1.MONGO));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api", allItemsRouter_1.cocktailRouter);
