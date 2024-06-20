@@ -16,7 +16,7 @@ const corsOptions = {
     optionsSuccessStatus: 200,
 };
 app.use((0, cors_1.default)(corsOptions));
-(0, mongoose_1.connect)(String(config_1.MONGO));
+(0, mongoose_1.connect)(config_1.MONGO);
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api", allItemsRouter_1.cocktailRouter);

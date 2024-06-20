@@ -26,7 +26,7 @@ router.get("/base", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 }));
 router.post("/add", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newCocktail = new allItems_1.Cocktail(req.query);
+        const newCocktail = new allItems_1.Cocktail(req.body);
         const result = yield newCocktail.save();
         if (!result)
             throw new Error("No added");

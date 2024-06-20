@@ -129,7 +129,7 @@ import apiClient from '@/services/api';
                     story: ""
                 };
                 const url = `/api/add`;
-                const response = await apiClient.post(url, null, { params: newCocktail });
+                const response = await apiClient.post(url, newCocktail);
                 this.cocktails.push(response.data);
 
                 this.enterName = '';

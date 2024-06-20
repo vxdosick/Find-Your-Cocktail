@@ -13,7 +13,7 @@ const corsOptions: cors.CorsOptions = {
   };
   
   app.use(cors(corsOptions))
-connect(String(MONGO))
+connect(MONGO)
 
 
 app.use(express.json());

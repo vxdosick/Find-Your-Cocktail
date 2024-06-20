@@ -14,7 +14,7 @@ router.get("/base", async (req, res)=> {
 
 router.post("/add", async (req, res)=> {
     try {
-        const newCocktail = new Cocktail(req.query)
+        const newCocktail = new Cocktail(req.body)
         const result = await newCocktail.save()
         if (!result) throw new Error("No added")
         res.status(200).send(result)
